@@ -3,14 +3,15 @@
 <plist version="1.0">
 <dict>
 	<key>content</key>
-	<string>should ${1:==} $0</string>
+	<string>should be_close(${1:result}, ${2:tolerance})
+$0</string>
 	<key>name</key>
-	<string>should</string>
+	<string>should be_close (sh trigger)</string>
 	<key>scope</key>
 	<string>source.ruby.rspec</string>
 	<key>tabTrigger</key>
 	<string>sh</string>
 	<key>uuid</key>
-	<string>29D96A33-A4E0-4047-A1C8-B28CDCB0B9D9</string>
+	<string>410FF052-0EB6-4581-AE94-C5B9268768C6</string>
 </dict>
 </plist>
