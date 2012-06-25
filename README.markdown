@@ -5,6 +5,7 @@
  * Added generic snippet sh⇥ which brings up menu of sh matchers
  * Added snippet shbw⇥ for should be_within(tolerance).of(amount)
  * Updated bef⇥ and shrt⇥ snippets so they do not include the : in the snippet step.
+ * Added snippet for expects {x}.to change {y}.by(), expects {x}.to raise_error
 
 ## Installation
 
