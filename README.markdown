@@ -1,5 +1,11 @@
 # RSpec TextMate Bundle
 
+## Differences with Original
+* Changed should snippets so they do not have target as the first step. (ie sh=⇥ gives you should == NOT target.should ==).  I find this is flows more naturally.
+ * Added generic snippet sh⇥ which brings up menu of sh matchers
+ * Added snippet shbw⇥ for should be_within(tolerance).of(amount)
+ * Updated bef⇥ and shrt⇥ snippets so they do not include the : in the snippet step.
+
 ## Installation
 
     mkdir -p ~/Library/Application\ Support/TextMate/Pristine\ Copy/Bundles

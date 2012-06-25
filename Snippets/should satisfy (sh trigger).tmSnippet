@@ -3,8 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>content</key>
-	<string>should satisfy { |obj| $1 }
-$0</string>
+	<string>should satisfy { |obj| $1 }$0</string>
 	<key>name</key>
 	<string>should satisfy (sh trigger)</string>
 	<key>scope</key>

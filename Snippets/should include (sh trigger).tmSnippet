@@ -3,15 +3,14 @@
 <plist version="1.0">
 <dict>
 	<key>content</key>
-	<string>should have_at_most(${1:num}).${2:things}
-$0</string>
+	<string>should include(/${1:item}/)$0</string>
 	<key>name</key>
-	<string>should have_at_most (sh trigger)</string>
+	<string>should include (sh trigger)</string>
 	<key>scope</key>
 	<string>source.ruby.rspec</string>
 	<key>tabTrigger</key>
 	<string>sh</string>
 	<key>uuid</key>
-	<string>A1D1C31F-F4ED-4513-B8C2-7E88A772E647</string>
+	<string>35426BA1-58CD-4CD2-BC94-45DFE1E229A5</string>
 </dict>
 </plist>

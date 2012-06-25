@@ -3,14 +3,14 @@
 <plist version="1.0">
 <dict>
 	<key>content</key>
-	<string>should be_within(${1:tolerance}).of(${2:amount})$0</string>
+	<string>should include(/${1:item}/)$0</string>
 	<key>name</key>
-	<string>should be_within (sh trigger)</string>
+	<string>should include</string>
 	<key>scope</key>
 	<string>source.ruby.rspec</string>
 	<key>tabTrigger</key>
-	<string>sh</string>
+	<string>shi</string>
 	<key>uuid</key>
-	<string>410FF052-0EB6-4581-AE94-C5B9268768C6</string>
+	<string>46085AEB-275A-4C5F-BBFF-8BD5642FB807</string>
 </dict>
 </plist>

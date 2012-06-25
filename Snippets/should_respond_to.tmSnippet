@@ -3,8 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>content</key>
-	<string>${1:target}.should respond_to(:${2:method})
-$0</string>
+	<string>should respond_to(:${1:method})$0</string>
 	<key>name</key>
 	<string>should respond_to</string>
 	<key>scope</key>

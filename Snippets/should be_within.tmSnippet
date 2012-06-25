@@ -5,12 +5,12 @@
 	<key>content</key>
 	<string>should be_within(${1:tolerance}).of(${2:amount})$0</string>
 	<key>name</key>
-	<string>should be_within (sh trigger)</string>
+	<string>should be_within of</string>
 	<key>scope</key>
 	<string>source.ruby.rspec</string>
 	<key>tabTrigger</key>
-	<string>sh</string>
+	<string>shbw</string>
 	<key>uuid</key>
-	<string>410FF052-0EB6-4581-AE94-C5B9268768C6</string>
+	<string>0264823E-CE98-41C7-B29D-544855175E0D</string>
 </dict>
 </plist>

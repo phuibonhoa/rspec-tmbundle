@@ -3,8 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>content</key>
-	<string>should have(${1:num}).${2:things}
-$0</string>
+	<string>should have(${1:num}).${2:things}$0</string>
 	<key>name</key>
 	<string>should have (sh trigger)</string>
 	<key>scope</key>
