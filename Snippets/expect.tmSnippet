@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>content</key>
-	<string>expect { ${1:action} }.to change { ${2:{something} }.${3:by/from/to}($4)$0</string>
+	<string>expect { ${1:action} }.to change { ${2:something} }.${3:by/from/to}($4)$0</string>
 	<key>name</key>
 	<string>expect</string>
 	<key>scope</key>
