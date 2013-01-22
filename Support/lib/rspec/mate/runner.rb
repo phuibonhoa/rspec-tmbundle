@@ -1,6 +1,27 @@
 require 'stringio'
 require 'cgi'
 
+alias :orig_puts :puts
+def puts(str)
+  spec_caller = if caller[0].split(/[\\\/:]/)[-3] == 'runner.rb'
+    caller[1]
+  else
+    caller[0]
+  end
+
+  url, line = spec_caller.split(":")
+  orig_puts <<-HTML
+  <div class='puts' style='width: 100%; font-size: 12px; padding: 5px 5px 5px 20px; background-color: #333; color: white; border-left: 5px solid black; border-bottom: 2px solid black'>
+    <div class='caller'><a style="text-decoration: none; font-size: 12px;" href="txmt://open?url=file://#{url}&line=#{line}">#{spec_caller.split(/[\\\/:]/)[-3..-2].join(":")}</a></div>
+    <div class='message' style="font-family: Monaco, Courier, monospace; margin-top: 4px; font-size: 11px; width: 90%">#{CGI.escapeHTML(str.to_s)}</div>
+  </div>
+  HTML
+end
+
+def p(object)
+  puts(object.inspect)
+end
+
 module RSpec
   module Mate
     class Runner
@@ -16,7 +37,7 @@ module RSpec
         options.merge!({:files => [single_file]})
         run(stdout, options)
       end
-      
+
       def run_last_remembered_file(stdout, options={})
         options.merge!({:files => [last_remembered_single_file]})
         run(stdout, options)
@@ -52,15 +73,15 @@ module RSpec
         stdout << "<h1>Uncaught Exception</h1>" <<
         "<p>#{e.class}: #{e.message}</p>" <<
         "<pre>" <<
-          CGI.escapeHTML(e.backtrace.join("\n  ")) << 
+          CGI.escapeHTML(e.backtrace.join("\n  ")) <<
         "</pre>" <<
         "<h2>Options:</h2>" <<
-        "<pre>" << 
+        "<pre>" <<
           CGI.escapeHTML(PP.pp(options, '')) <<
         "</pre>"
       ensure
         unless stderr.string == ""
-          stdout << "<h2>stderr:</h2>" << 
+          stdout << "<h2>stderr:</h2>" <<
            "<pre>" << CGI.escapeHTML(stderr.string) << "</pre>"
         end
         $stderr = old_stderr
@@ -75,7 +96,7 @@ module RSpec
       def last_remembered_file_cache
         "/tmp/textmate_rspec_last_remembered_file_cache.txt"
       end
-      
+
     protected
 
       def single_file
@@ -86,7 +107,7 @@ module RSpec
         file = File.read(last_remembered_file_cache).strip
         File.expand_path(file) if file.size > 0
       end
-      
+
       def project_directory
         File.expand_path(ENV['TM_PROJECT_DIRECTORY']) rescue File.dirname(single_file)
       end
