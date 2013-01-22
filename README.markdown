@@ -1,6 +1,7 @@
 # RSpec TextMate Bundle
 
 ## Differences with Original
+* puts and p statements in specs are actually viewable! ![image](http://i.imgur.com/BFtYofC.jpg)
 * Changed should snippets so they do not have target as the first step. (ie sh=⇥ gives you should == NOT target.should ==).  I find this is flows more naturally.
  * Added generic snippet sh⇥ which brings up menu of sh matchers
  * Added snippet shbw⇥ for should be_within(tolerance).of(amount)
