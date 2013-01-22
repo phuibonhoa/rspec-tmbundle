@@ -3,16 +3,14 @@
 <plist version="1.0">
 <dict>
 	<key>content</key>
-	<string>describe '${1:subject}' do
-  $0
-end</string>
+	<string>expect { ${1:action} }.to change { ${2:something} }.${3:by/from/to}($4)$0</string>
 	<key>name</key>
-	<string>describe (String)</string>
+	<string>expect (full trigger)</string>
 	<key>scope</key>
 	<string>source.ruby.rspec</string>
 	<key>tabTrigger</key>
-	<string>des</string>
+	<string>expect</string>
 	<key>uuid</key>
-	<string>34CBBD13-CE8E-4601-9968-C2CB0D771CA5</string>
+	<string>5AA9409C-F5D0-4B51-A9A9-AC0250ED0517</string>
 </dict>
 </plist>

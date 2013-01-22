@@ -5,7 +5,7 @@
 	<key>content</key>
 	<string>should respond_to(:${1:method})$0</string>
 	<key>name</key>
-	<string>should respond_to (sh trigger)</string>
+	<string>respond_to</string>
 	<key>scope</key>
 	<string>source.ruby.rspec</string>
 	<key>tabTrigger</key>

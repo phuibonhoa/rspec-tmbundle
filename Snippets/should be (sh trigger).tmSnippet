@@ -5,7 +5,7 @@
 	<key>content</key>
 	<string>should be ${1:something}</string>
 	<key>name</key>
-	<string>should be (sh trigger)</string>
+	<string>be</string>
 	<key>scope</key>
 	<string>source.ruby.rspec</string>
 	<key>tabTrigger</key>

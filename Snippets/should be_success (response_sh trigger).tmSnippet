@@ -3,16 +3,14 @@
 <plist version="1.0">
 <dict>
 	<key>content</key>
-	<string>describe '${1:subject}' do
-  $0
-end</string>
+	<string>response.should be_success$0</string>
 	<key>name</key>
-	<string>describe (String)</string>
+	<string>should be_success (response.sh trigger)</string>
 	<key>scope</key>
 	<string>source.ruby.rspec</string>
 	<key>tabTrigger</key>
-	<string>des</string>
+	<string>response.sh</string>
 	<key>uuid</key>
-	<string>34CBBD13-CE8E-4601-9968-C2CB0D771CA5</string>
+	<string>1E9049BF-45BD-49CA-B52F-A4FAD541F519</string>
 </dict>
 </plist>

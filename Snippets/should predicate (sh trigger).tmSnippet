@@ -5,7 +5,7 @@
 	<key>content</key>
 	<string>should be_${1:predicate}$0</string>
 	<key>name</key>
-	<string>should predicate (sh trigger)</string>
+	<string>be_&lt;predicate&gt;</string>
 	<key>scope</key>
 	<string>source.ruby.rspec</string>
 	<key>tabTrigger</key>

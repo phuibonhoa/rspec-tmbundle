@@ -5,7 +5,7 @@
 	<key>content</key>
 	<string>should match(/${1:regexp}/)$0</string>
 	<key>name</key>
-	<string>should match (sh trigger)</string>
+	<string>match</string>
 	<key>scope</key>
 	<string>source.ruby.rspec</string>
 	<key>tabTrigger</key>

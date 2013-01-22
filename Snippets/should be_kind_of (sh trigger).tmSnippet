@@ -5,7 +5,7 @@
 	<key>content</key>
 	<string>should be_a_kind_of(${1:klass})$0</string>
 	<key>name</key>
-	<string>should be_kind_of (sh trigger)</string>
+	<string>be_kind_of</string>
 	<key>scope</key>
 	<string>source.ruby.rspec</string>
 	<key>tabTrigger</key>
