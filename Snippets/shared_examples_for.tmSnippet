@@ -9,7 +9,7 @@ end</string>
 	<key>name</key>
 	<string>shared_examples_for</string>
 	<key>scope</key>
-	<string>source.ruby.rspec</string>
+	<string>source.ruby.rails.rspec</string>
 	<key>tabTrigger</key>
 	<string>sef</string>
 	<key>uuid</key>

@@ -7,7 +7,7 @@
 	<key>name</key>
 	<string>should_not be_within of</string>
 	<key>scope</key>
-	<string>source.ruby.rspec</string>
+	<string>source.ruby.rails.rspec</string>
 	<key>tabTrigger</key>
 	<string>shnbw</string>
 	<key>uuid</key>

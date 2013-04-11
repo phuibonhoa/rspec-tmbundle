@@ -12,7 +12,7 @@ end
 	<key>name</key>
 	<string>Matcher (DSL)</string>
 	<key>scope</key>
-	<string>source.ruby.rspec</string>
+	<string>source.ruby.rails.rspec</string>
 	<key>tabTrigger</key>
 	<string>mat</string>
 	<key>uuid</key>

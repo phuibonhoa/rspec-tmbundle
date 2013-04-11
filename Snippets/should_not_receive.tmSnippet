@@ -8,7 +8,7 @@
 	<key>name</key>
 	<string>should_not_receive</string>
 	<key>scope</key>
-	<string>source.ruby.rspec</string>
+	<string>source.ruby.rails.rspec</string>
 	<key>tabTrigger</key>
 	<string>shnr</string>
 	<key>uuid</key>

@@ -7,7 +7,7 @@
 	<key>name</key>
 	<string>expect raise_error</string>
 	<key>scope</key>
-	<string>source.ruby.rspec</string>
+	<string>source.ruby.rails.rspec</string>
 	<key>tabTrigger</key>
 	<string>expr</string>
 	<key>uuid</key>

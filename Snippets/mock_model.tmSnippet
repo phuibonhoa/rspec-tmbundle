@@ -7,7 +7,7 @@
 	<key>name</key>
 	<string>mock_model</string>
 	<key>scope</key>
-	<string>source.ruby.rspec</string>
+	<string>source.ruby.rails.rspec</string>
 	<key>tabTrigger</key>
 	<string>mm</string>
 	<key>uuid</key>

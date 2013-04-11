@@ -7,7 +7,7 @@
 	<key>name</key>
 	<string>should render_template (response.sh trigger)</string>
 	<key>scope</key>
-	<string>source.ruby.rspec</string>
+	<string>source.ruby.rails.rspec</string>
 	<key>tabTrigger</key>
 	<string>response.sh</string>
 	<key>uuid</key>

@@ -30,7 +30,7 @@ end</string>
 	<key>name</key>
 	<string>Matcher (Custom)</string>
 	<key>scope</key>
-	<string>source.ruby.rspec</string>
+	<string>source.ruby.rails.rspec</string>
 	<key>tabTrigger</key>
 	<string>matc</string>
 	<key>uuid</key>

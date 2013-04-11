@@ -9,7 +9,7 @@ end</string>
 	<key>name</key>
 	<string>before(:all)</string>
 	<key>scope</key>
-	<string>source.ruby.rspec</string>
+	<string>source.ruby.rails.rspec</string>
 	<key>tabTrigger</key>
 	<string>befa</string>
 	<key>uuid</key>

@@ -72,7 +72,7 @@
 		</dict>
 		<dict>
 			<key>include</key>
-			<string>source.ruby</string>
+			<string>source.ruby.rails</string>
 		</dict>
 	</array>
 	<key>repository</key>
@@ -105,7 +105,7 @@
 			<array>
 				<dict>
 					<key>include</key>
-					<string>source.ruby</string>
+					<string>source.ruby.rails</string>
 				</dict>
 			</array>
 		</dict>
@@ -137,7 +137,7 @@
 			<array>
 				<dict>
 					<key>include</key>
-					<string>source.ruby</string>
+					<string>source.ruby.rails</string>
 				</dict>
 			</array>
 		</dict>
@@ -153,7 +153,7 @@
 				<key>2</key>
 				<dict>
 					<key>name</key>
-					<string>string.ruby</string>
+					<string>string.ruby.rails</string>
 				</dict>
 			</dict>
 			<key>match</key>
@@ -176,7 +176,7 @@
 		</dict>
 	</dict>
 	<key>scopeName</key>
-	<string>source.ruby.rspec</string>
+	<string>source.ruby.rails.rspec</string>
 	<key>uuid</key>
 	<string>923F0A10-96B9-4792-99A4-94FEF66E0B8C</string>
 </dict>

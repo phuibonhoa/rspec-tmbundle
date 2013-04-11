@@ -7,7 +7,7 @@
 	<key>name</key>
 	<string>should have</string>
 	<key>scope</key>
-	<string>source.ruby.rspec</string>
+	<string>source.ruby.rails.rspec</string>
 	<key>tabTrigger</key>
 	<string>shh</string>
 	<key>uuid</key>

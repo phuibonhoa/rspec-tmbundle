@@ -7,7 +7,7 @@
 	<key>name</key>
 	<string>should_not =~</string>
 	<key>scope</key>
-	<string>source.ruby.rspec</string>
+	<string>source.ruby.rails.rspec</string>
 	<key>uuid</key>
 	<string>7563CED5-5FD8-454C-972C-AC240D549E8B</string>
 </dict>
