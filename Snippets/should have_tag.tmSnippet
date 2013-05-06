@@ -3,14 +3,14 @@
 <plist version="1.0">
 <dict>
 	<key>content</key>
-	<string>should be ${1:something}</string>
+	<string>response.body.should have_selector("${1:element}"$0)</string>
 	<key>name</key>
-	<string>be</string>
+	<string>should have_selector</string>
 	<key>scope</key>
 	<string>source.ruby.rails.rspec</string>
 	<key>tabTrigger</key>
-	<string>sh</string>
+	<string>response.sh</string>
 	<key>uuid</key>
-	<string>0DD4C0D4-E12F-4D5A-9498-0500216BC0D8</string>
+	<string>1D2F0DE1-ACEB-44C1-A638-6B5BF9908D83</string>
 </dict>
 </plist>
