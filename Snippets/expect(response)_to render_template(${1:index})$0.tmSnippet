@@ -3,14 +3,14 @@
 <plist version="1.0">
 <dict>
 	<key>content</key>
-	<string>to receive(:${0:regexp})</string>
+	<string>expect(response).to render_template(${1:success})$0</string>
 	<key>name</key>
-	<string>to receive</string>
+	<string>render_template</string>
 	<key>scope</key>
 	<string>source.ruby.rails.rspec</string>
 	<key>tabTrigger</key>
-	<string>to </string>
+	<string>expect(response).to </string>
 	<key>uuid</key>
-	<string>E5386C6A-612F-4694-B9BF-3BFC1FDAE91B</string>
+	<string>F64EA432-3B16-4701-BC76-39BCB5BEC0B6</string>
 </dict>
 </plist>

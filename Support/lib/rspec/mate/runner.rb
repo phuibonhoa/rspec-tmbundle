@@ -1,5 +1,6 @@
 require 'stringio'
 require 'cgi'
+require 'rspec'
 require 'rspec/core/formatters/html_formatter'
 
 alias :orig_puts :puts
@@ -76,7 +77,15 @@ module RSpec
           @output.puts "    <dd class=\"example not_implemented\"><span class=\"not_implemented_spec_name\">#{h(description)} (PENDING: #{h(pending_message)})</span></dd>"
         end
 
-        def print_summary( was_dry_run, duration, example_count, failure_count, pending_count )
+        def print_summary( *args )
+
+          # rspec 2.x.x passes dry_run, 3.x.x does not
+          if args.size == 5
+            was_dry_run, duration, example_count, failure_count, pending_count = *args
+          else
+            duration, example_count, failure_count, pending_count = *args
+          end
+
           # TODO - kill dry_run?
           if was_dry_run
             totals = "This was a dry-run"

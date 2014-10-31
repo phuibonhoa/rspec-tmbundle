@@ -3,14 +3,14 @@
 <plist version="1.0">
 <dict>
 	<key>content</key>
-	<string>to receive(:${0:regexp})</string>
+	<string>expect(response).to have_http_status(${1::success})$0</string>
 	<key>name</key>
-	<string>to receive</string>
+	<string>have_http_status</string>
 	<key>scope</key>
 	<string>source.ruby.rails.rspec</string>
 	<key>tabTrigger</key>
-	<string>to </string>
+	<string>expect(response).to </string>
 	<key>uuid</key>
-	<string>E5386C6A-612F-4694-B9BF-3BFC1FDAE91B</string>
+	<string>4A4DD1E2-5A85-4A4E-AE47-1105D0130FD3</string>
 </dict>
 </plist>

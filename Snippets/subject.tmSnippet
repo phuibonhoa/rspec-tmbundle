@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>content</key>
-	<string>subject(:${1:subject_name}) { ${2:Subject.new} }$0</string>
+	<string>subject${2:(:${1:result})} { ${3:Subject.new} }$0</string>
 	<key>name</key>
 	<string>subject</string>
 	<key>scope</key>

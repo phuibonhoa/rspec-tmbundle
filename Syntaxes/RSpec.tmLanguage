@@ -141,6 +141,38 @@
 				</dict>
 			</array>
 		</dict>
+		<key>named-single-line-example</key>
+		<dict>
+			<key>begin</key>
+			<string>^\s*(it|specify)\b</string>
+			<key>beginCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>keyword.other.rspec.example</string>
+				</dict>
+			</dict>
+			<key>end</key>
+			<string>\b(\{)</string>
+			<key>endCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>keyword.control.ruby.start-block</string>
+				</dict>
+			</dict>
+			<key>name</key>
+			<string>meta.rspec.example</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>source.ruby.rails</string>
+				</dict>
+			</array>
+		</dict>
 		<key>pending</key>
 		<dict>
 			<key>captures</key>

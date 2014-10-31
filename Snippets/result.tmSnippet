@@ -3,16 +3,14 @@
 <plist version="1.0">
 <dict>
 	<key>content</key>
-	<string>execute do
-	$0
-end</string>
+	<string>result</string>
 	<key>name</key>
-	<string>execute</string>
+	<string>result</string>
 	<key>scope</key>
 	<string>source.ruby.rails.rspec</string>
 	<key>tabTrigger</key>
-	<string>exec</string>
+	<string>re</string>
 	<key>uuid</key>
-	<string>B5EBA369-C8AD-4FBE-B9F8-D26A6CBF7E9A</string>
+	<string>0E9C60DF-1EA7-4D0C-9A9E-CFE55F3EED92</string>
 </dict>
 </plist>

@@ -5,7 +5,7 @@
 	<key>beforeRunningCommand</key>
 	<string>nop</string>
 	<key>command</key>
-	<string>#!/System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/bin/ruby
+	<string>#!/System/Library/Frameworks/Ruby.framework/Versions/2.0/usr/bin/ruby -wU
 selected_text = STDIN.read
 
 if selected_text == ''
@@ -17,17 +17,25 @@ end</string>
 	<string>none</string>
 	<key>input</key>
 	<string>selection</string>
+	<key>inputFormat</key>
+	<string>text</string>
 	<key>keyEquivalent</key>
 	<string>^@A</string>
 	<key>name</key>
 	<string>allow()</string>
-	<key>output</key>
-	<string>insertAsSnippet</string>
+	<key>outputCaret</key>
+	<string>afterOutput</string>
+	<key>outputFormat</key>
+	<string>snippet</string>
+	<key>outputLocation</key>
+	<string>replaceInput</string>
 	<key>scope</key>
 	<string>source.ruby.rails.rspec</string>
 	<key>tabTrigger</key>
-	<string>e</string>
+	<string>a</string>
 	<key>uuid</key>
 	<string>6CFD7A31-A909-48F4-A90E-503D16C6A97A</string>
+	<key>version</key>
+	<integer>2</integer>
 </dict>
 </plist>
