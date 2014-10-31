@@ -12,32 +12,30 @@
 cat &lt;&lt;'RUBYEOF' &gt; /tmp/textmate-command-$$.rb
 
 require ENV['TM_BUNDLE_SUPPORT'] + "/lib/rspec/mate"
-# Remembers the last _spec.rb file so that 'Run last spec' command 
-# can be activated from any Ruby source file
-
-RSpec::Mate::Runner.new.save_as_last_remembered_file ENV['TM_FILEPATH']
+RSpec::Mate::Runner.new.run_again STDOUT
 
 RUBYEOF
 
 ${TM_RUBY:-ruby} /tmp/textmate-command-$$.rb; exit_status=$?; rm /tmp/textmate-command-$$.rb; exit $exit_status
-
 </string>
 	<key>input</key>
 	<string>none</string>
 	<key>inputFormat</key>
 	<string>text</string>
+	<key>keyEquivalent</key>
+	<string>~@r</string>
 	<key>name</key>
-	<string>Save Example file and remember</string>
+	<string>Run Again</string>
 	<key>outputCaret</key>
 	<string>afterOutput</string>
 	<key>outputFormat</key>
-	<string>text</string>
+	<string>html</string>
 	<key>outputLocation</key>
-	<string>toolTip</string>
+	<string>newWindow</string>
 	<key>scope</key>
-	<string>source.ruby.rails.rspec</string>
+	<string>attr.test.rspec</string>
 	<key>uuid</key>
-	<string>AC7FD3DD-A904-4B5B-8B02-4D6F04CD8ED5</string>
+	<string>CB648A00-9F6C-4D9B-BB43-DADB40DE4C8E</string>
 	<key>version</key>
 	<integer>2</integer>
 </dict>

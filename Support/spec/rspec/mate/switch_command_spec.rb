@@ -43,28 +43,6 @@ module RSpec
           "/a/full/path/lib/snoopy/mooky.rb".should be_a("file")
         end
 
-        it "create a spec for spec files" do
-          regular_spec = <<-SPEC
-require 'spec_helper'
-
-describe ${1:Type} do
-  $0
-end
-SPEC
-          SwitchCommand.new.content_for('spec', "spec/foo/zap_spec.rb").should == regular_spec
-          SwitchCommand.new.content_for('spec', "spec/controller/zap_spec.rb").should == regular_spec
-        end
-
-        it "create class for regular file" do
-          file = <<-EOF
-module Foo
-  class Zap
-  end
-end
-EOF
-          SwitchCommand.new.content_for('file', "lib/foo/zap.rb").should == file
-          SwitchCommand.new.content_for('file', "some/other/path/lib/foo/zap.rb").should == file
-        end
       end
 
       describe "in a Rails or Merb app" do
@@ -83,28 +61,13 @@ EOF
         ]
 
         expect_twins [
-          "/a/full/path/spec/controllers/application_controller_spec.rb",
-          "/a/full/path/app/controllers/application_controller.rb"
-        ]
-
-        expect_twins [
           "/a/full/path/app/controllers/job_applications_controller.rb",
           "/a/full/path/spec/controllers/job_applications_controller_spec.rb"
         ]
 
         expect_twins [
-          "/a/full/path/spec/controllers/job_applications_controller_spec.rb",
-          "/a/full/path/app/controllers/job_applications_controller.rb"
-        ]
-
-        expect_twins [
           "/a/full/path/app/helpers/application_helper.rb",
           "/a/full/path/spec/helpers/application_helper_spec.rb"
-        ]
-
-        expect_twins [
-          "/a/full/path/spec/helpers/application_helper_spec.rb",
-          "/a/full/path/app/helpers/application_helper.rb"
         ]
 
         expect_twins [
@@ -150,6 +113,11 @@ EOF
         expect_twins [
           "/a/full/path/lib/foo/mooky.rb",
           "/a/full/path/spec/lib/foo/mooky_spec.rb"
+        ]
+
+        expect_twins [
+          "/a/full/path/app/lib/foo/mooky.rb",
+          "/a/full/path/spec/app/lib/foo/mooky_spec.rb"
         ]
 
         it "suggests a controller spec" do
@@ -200,34 +168,24 @@ EOF
           "/a/full/path/app/views/mooky/show.js.rjs".should be_a("view")
         end
 
-        it "create a spec that requires a helper" do
-          SwitchCommand.new.content_for('controller spec', "spec/controllers/mooky_controller_spec.rb").split("\n")[0].should ==
-            "require 'spec_helper'"
-        end
+      end
 
-        it "creates a controller if twinned from a controller spec" do
-          SwitchCommand.new.content_for('controller', "spec/controllers/mooky_controller.rb").should == <<-EXPECTED
-class MookyController < ApplicationController
-end
-EXPECTED
-        end
+      describe '#described_class_for' do
+        base = '/Users/foo/Code/bar'
+        {
+          # normal project
+          '/Users/foo/Code/bar/lib/some_name.rb' => 'SomeName',
+          '/Users/foo/Code/bar/lib/some/long_file_name.rb' => 'Some::LongFileName',
+          '/Users/foo/Code/bar/lib/my/own/file.rb' => 'My::Own::File',
 
-        it "creates a model if twinned from a model spec" do
-          SwitchCommand.new.content_for('model', "spec/models/mooky.rb").should == <<-EXPECTED
-class Mooky < ActiveRecord::Base
-end
-EXPECTED
-        end
-
-        it "creates a helper if twinned from a helper spec" do
-          SwitchCommand.new.content_for('helper', "spec/helpers/mooky_helper.rb").should == <<-EXPECTED
-module MookyHelper
-end
-EXPECTED
-        end
-
-        it "creates an empty view if twinned from a view spec" do
-          SwitchCommand.new.content_for('view', "spec/views/mookies/index.html.erb_spec.rb").should == ""
+          # rails
+          '/Users/foo/Code/bar/app/controllers/file_controller.rb' => 'FileController',
+          '/Users/foo/Code/bar/app/models/my/own/file.rb' => 'My::Own::File',
+          '/Users/foo/Code/bar/app/other/my/own/file.rb' => 'My::Own::File',
+        }.each_pair do |path, class_name|
+          it "extracts the full class name from the path (#{class_name})" do
+            expect(subject.described_class_for(path, base)).to eq(class_name)
+          end
         end
       end
     end

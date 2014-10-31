@@ -3,14 +3,16 @@
 <plist version="1.0">
 <dict>
 	<key>content</key>
-	<string>let!(:${1:instance}) { $0 }</string>
+	<string>scenario '${1:scenario description}' do
+  $0
+end</string>
 	<key>name</key>
-	<string>let!</string>
+	<string>scenario</string>
 	<key>scope</key>
 	<string>source.ruby.rspec</string>
 	<key>tabTrigger</key>
-	<string>let!</string>
+	<string>sce</string>
 	<key>uuid</key>
-	<string>4AA40F8B-6382-4B5D-965E-12AD6C4DFC52</string>
+	<string>8F5D977F-AD4B-45A5-B6B9-72FEBCBB36B2</string>
 </dict>
 </plist>

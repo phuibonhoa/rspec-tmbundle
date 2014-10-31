@@ -3,14 +3,14 @@
 <plist version="1.0">
 <dict>
 	<key>content</key>
-	<string>let!(:${1:instance}) { $0 }</string>
+	<string>${TM_SELECTED_TEXT}.${1|should,should_not|} ${2:eq(${4:value})}</string>
 	<key>name</key>
-	<string>let!</string>
+	<string>actual.should eq(…)</string>
 	<key>scope</key>
 	<string>source.ruby.rspec</string>
 	<key>tabTrigger</key>
-	<string>let!</string>
+	<string>.sh</string>
 	<key>uuid</key>
-	<string>4AA40F8B-6382-4B5D-965E-12AD6C4DFC52</string>
+	<string>6136B514-7EF5-4994-97A6-37089FB97761</string>
 </dict>
 </plist>

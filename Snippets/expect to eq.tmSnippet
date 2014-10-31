@@ -3,14 +3,16 @@
 <plist version="1.0">
 <dict>
 	<key>content</key>
-	<string>let!(:${1:instance}) { $0 }</string>
+	<string>expect(${1:${TM_SELECTED_TEXT:-target}}).${2|to,not_to,to_not|} ${3:eq(${4:value})}</string>
+	<key>keyEquivalent</key>
+	<string>^W</string>
 	<key>name</key>
-	<string>let!</string>
+	<string>expect(actual).to eq(…)</string>
 	<key>scope</key>
 	<string>source.ruby.rspec</string>
 	<key>tabTrigger</key>
-	<string>let!</string>
+	<string>ex</string>
 	<key>uuid</key>
-	<string>4AA40F8B-6382-4B5D-965E-12AD6C4DFC52</string>
+	<string>81AF4016-D543-476F-B70E-D0CF191B9CFD</string>
 </dict>
 </plist>

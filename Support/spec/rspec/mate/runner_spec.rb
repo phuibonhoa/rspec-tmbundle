@@ -1,5 +1,6 @@
 require 'spec_helper'
 require 'stringio'
+require 'shellwords'
 
 describe RSpec::Mate::Runner do
   before(:each) do
@@ -14,6 +15,10 @@ describe RSpec::Mate::Runner do
       "#{File.dirname(__FILE__)}/../../../lib/rspec/mate.rb"
     )
 
+    # Make sure we don’t overwrite the “real” files when running the examples here
+    stub_const("RSpec::Mate::Runner::LAST_RUN_CACHE", "/tmp/textmate_rspec_last_run.test.yml")
+    stub_const("RSpec::Mate::Runner::LAST_REMEMBERED_FILE_CACHE", "/tmp/textmate_rspec_last_remembered_file_cache.test.txt")
+    
     @spec_mate = RSpec::Mate::Runner.new
     @test_runner_io = StringIO.new
   end
@@ -70,9 +75,7 @@ describe RSpec::Mate::Runner do
       ]
 
       # TODO: adjust fixtures_path to take an array
-      ENV['TM_SELECTED_FILES'] = fixtures.map do |fixture|
-        "'#{fixtures_path(fixture)}'"
-      end.join(" ")
+      ENV['TM_SELECTED_FILES'] = Shellwords.join(fixtures.map{ |fixture| fixtures_path(fixture) })
 
       @spec_mate.run_files(@test_runner_io)
       @test_runner_io.rewind
@@ -82,6 +85,34 @@ describe RSpec::Mate::Runner do
       html.should =~ @second_failing_spec
       html.should =~ /should pass/
       html.should =~ /should pass too/
+    end
+
+    # This spec is necessary because RSpec 3 uses a different codepath in
+    # RSpec::Core::Runner#run when setting up `argv`.
+    it "works for RSpec3" do
+      ENV['TM_SELECTED_FILES'] = "/foo.spec /bar.spec"
+
+      @spec_mate.stub(:rspec3? => true)
+      received_argv = nil
+      RSpec::Core::Runner.should_receive(:run) do |argv, stderr, stdout|
+        # Can not set expectations on args in this block, because RSpec::Core::Runner#run has `rescue Exception`.
+        # See https://github.com/rspec/rspec-mocks/issues/203
+        received_argv = argv
+      end
+      @spec_mate.run_files(@test_runner_io)
+      received_argv[0..1].should eq ["/foo.spec", "/bar.spec"]
+    end
+
+    it 'runs all examples in "spec/" if nothing is selected' do
+      ENV['TM_SELECTED_FILES'] = nil
+      received_argv = nil
+      RSpec::Core::Runner.should_receive(:run) do |argv, stderr, stdout|
+        # Can not set expectations on args in this block, because RSpec::Core::Runner#run has `rescue Exception`.
+        # See https://github.com/rspec/rspec-mocks/issues/203
+        received_argv = argv
+      end
+      @spec_mate.run_files(@test_runner_io)
+      received_argv[0].should eq "spec/"
     end
   end
 
@@ -93,6 +124,40 @@ describe RSpec::Mate::Runner do
       html = @test_runner_io.read
 
       html.should =~ @first_failing_spec
+    end
+  end
+
+  describe '#run_again' do
+    def self.it_works_for(method, &block)
+      it "works for #{method}" do
+        original_argv, rerun_argv = nil, nil
+        RSpec::Core::Runner.stub(:run) do |argv, stderr, stdout|
+          original_argv = argv.dup
+        end
+        instance_exec(&block)
+        original_argv.should_not be_nil
+        RSpec::Core::Runner.stub(:run) do |argv, stderr, stdout|
+          rerun_argv = argv.dup
+        end
+        @spec_mate.run_again(@test_runner_io)
+        rerun_argv.should eq original_argv
+      end
+    end
+    
+    it_works_for '#run_file' do
+      ENV['TM_FILEPATH'] = fixtures_path('example_failing_spec.rb')
+      @spec_mate.run_file(@test_runner_io)
+    end
+    
+    it_works_for '#run_files' do
+      ENV['TM_SELECTED_FILES'] = "foo/bar_spec.rb baz/baz/baz/baz_spec.rb"
+      @spec_mate.run_files(@test_runner_io)
+    end
+    
+    it_works_for '#run_focused' do
+      ENV['TM_FILEPATH'] = fixtures_path('example_failing_spec.rb')
+      ENV['TM_LINE_NUMBER'] = '4'
+      @spec_mate.run_focussed(@test_runner_io)
     end
   end
 
@@ -109,7 +174,7 @@ describe RSpec::Mate::Runner do
       html.should_not =~ @second_failing_spec
     end
 
-    it "runs first spec when file and line 8 specified" do
+    it "runs second spec when file and line 8 specified" do
       ENV['TM_FILEPATH'] = fixtures_path('example_failing_spec.rb')
       ENV['TM_LINE_NUMBER'] = '8'
 
@@ -119,6 +184,22 @@ describe RSpec::Mate::Runner do
 
       html.should_not =~ @first_failing_spec
       html.should =~ @second_failing_spec
+    end
+
+    it "uses new syntax for RSpec 3" do
+      ENV['TM_FILEPATH'] = "/path/to/spec.rb"
+      ENV['TM_LINE_NUMBER'] = '8'
+
+      @spec_mate.stub(:rspec3? => true)
+      received_argv = nil
+      RSpec::Core::Runner.should_receive(:run) do |argv, stderr, stdout|
+        # Can not set expectations on args in this block, because RSpec::Core::Runner#run has `rescue Exception`.
+        # See https://github.com/rspec/rspec-mocks/issues/203
+        received_argv = argv
+      end
+      @spec_mate.run_focussed(@test_runner_io)
+      received_argv.should_not include("--line")
+      received_argv.should include("/path/to/spec.rb:8")
     end
   end
 

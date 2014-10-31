@@ -14,7 +14,7 @@ module RSpec
             "<a href='#{CGI.escape_html(url)}'>#{CGI.escape_html(link_text)}</a>:#{CGI.escape_html(rest)}"
           end
         end
-
+        
         def print_example_failed(pending_fixed, description, run_time, failure_id, exception, extra_content, escape_backtrace = false)
           exception[:backtrace] = make_backtrace_clickable(exception[:backtrace])
           # Call original implementation, but pass false for `escape_backtrace`

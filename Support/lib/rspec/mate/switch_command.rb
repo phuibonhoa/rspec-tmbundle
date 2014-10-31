@@ -1,3 +1,5 @@
+require "fileutils"
+
 module RSpec
   module Mate
     # This is based on Ruy Asan's initial code:
@@ -13,8 +15,7 @@ module RSpec
           file_type = file_type(other)
 
           if create?(relative, file_type)
-            content = content_for(file_type, relative)
-            write_and_open(other, content)
+            write_and_open(other)
           end
         end
       end
@@ -41,8 +42,12 @@ module RSpec
           case parent
             when 'lib', 'app' then
               if framework.merb_or_rails?
-                path = path.gsub(/\/app\//, "/spec/")
-                path = path.gsub(/\/lib\//, "/spec/lib/")
+                if path.include?("/app/lib/")
+                  path = path.gsub("/app/lib/", "/spec/app/lib/")
+                else
+                  path = path.gsub(/\/app\//, "/spec/")
+                  path = path.gsub(/\/lib\//, "/spec/lib/")
+                end
               else
                 path = path.gsub(/\/lib\//, "/spec/")
               end
@@ -62,8 +67,12 @@ module RSpec
               path = path.gsub(/_spec\.rb$/, ".rb")
 
               if framework.merb_or_rails?
-                path = path.gsub(/\/spec\/lib\//, "/lib/")
-                path = path.gsub(/\/spec\//, "/app/")
+                if path.include?("/spec/app/lib/")
+                  path = path.gsub("/spec/app/lib/", "/app/lib/")
+                else
+                  path = path.gsub(/\/spec\/lib\//, "/lib/")
+                  path = path.gsub(/\/spec\//, "/app/")
+                end
               else
                 path = path.gsub(/\/spec\//, "/lib/")
               end
@@ -94,32 +103,6 @@ module RSpec
         answer.to_s.chomp == "1"
       end
 
-      def content_for(file_type, relative_path)
-        case file_type
-          when /spec$/ then
-            spec(relative_path)
-          when "controller"
-            <<-CONTROLLER
-class #{class_from_path(relative_path)} < ApplicationController
-end
-CONTROLLER
-          when "model"
-            <<-MODEL
-class #{class_from_path(relative_path)} < ActiveRecord::Base
-end
-MODEL
-          when "helper"
-            <<-HELPER
-module #{class_from_path(relative_path)}
-end
-HELPER
-          when "view"
-            ""
-          else
-            klass(relative_path)
-        end
-      end
-
       def class_from_path(path)
         underscored = path.split('/').last.split('.rb').first
         parts = underscored.split('_')
@@ -128,26 +111,6 @@ HELPER
           word << part.capitalize
           word
         end
-      end
-
-      # Extracts the snippet text
-      def snippet(snippet_name)
-        snippet_file = File.expand_path(
-          File.dirname(__FILE__) +
-          "/../../../../Snippets/#{snippet_name}"
-        )
-
-        xml = File.open(snippet_file).read
-
-        xml.match(/<key>content<\/key>\s*<string>([^<]*)<\/string>/m)[1]
-      end
-
-      def spec(path)
-        content = <<-SPEC
-require 'spec_helper'
-
-#{snippet("Describe_type.tmSnippet")}
-SPEC
       end
 
       def klass(relative_path, content=nil)
@@ -174,16 +137,30 @@ SPEC
         lines.join("\n") + "\n"
       end
 
-      def write_and_open(path, content)
-        `mkdir -p "#{File.dirname(path)}"`
-        `touch "#{path}"`
-        `"$TM_SUPPORT_PATH/bin/mate" "#{path}"`
-        `osascript &>/dev/null -e 'tell app "SystemUIServer" to activate' -e 'tell app "TextMate" to activate'`
+      def write_and_open(path)
+        FileUtils.mkdir_p(File.dirname(path))
+        described = described_class_for(path, ENV['TM_PROJECT_DIRECTORY'])
+        File.open(path, 'w') do |f|
+          f.puts "require 'spec_helper'"
+          f.puts ''
+          f.puts "describe #{described} do"
+          f.puts '  ' # <= caret will be here
+          f.puts 'end'
+        end
+        system ENV['TM_SUPPORT_PATH']+'/bin/mate', path, '-l4:3'
+      end
 
-        escaped_content = content.gsub("\n","\\n").gsub('$','\\$').gsub('"','\\\\\\\\\\\\"')
-
-        `osascript &>/dev/null -e "tell app \\"TextMate\\" to insert \\"#{escaped_content}\\" as snippet true"`
+      def described_class_for(path, base_path)
+        relative_path = path[base_path.size..-1]
+        camelize = lambda {|part| part.gsub(/_([a-z])/){$1.upcase}.gsub(/^([a-z])/){$1.upcase}}
+        parts = File.dirname(relative_path).split('/').compact.reject(&:empty?)
+        parts.shift if parts.first == 'app'
+        described = Array(parts[1..-1]).map(&camelize)
+        described << camelize.call(File.basename(path, '_spec.rb').split('.').first)
+        described = described.compact.reject(&:empty?).join('::')
+        described
       end
     end
+
   end
 end
