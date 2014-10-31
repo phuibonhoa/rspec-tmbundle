@@ -3,16 +3,14 @@
 <plist version="1.0">
 <dict>
 	<key>content</key>
-	<string>before do
-  $0
-end</string>
+	<string>its(:${1:attribute}) { $0 }</string>
 	<key>name</key>
-	<string>before</string>
+	<string>its</string>
 	<key>scope</key>
 	<string>source.ruby.rails.rspec</string>
 	<key>tabTrigger</key>
-	<string>bef</string>
+	<string>its</string>
 	<key>uuid</key>
-	<string>7D960FC5-4859-4328-A06B-73A3CF6763E0</string>
+	<string>E816D7FF-BBB7-4818-937D-1674A77CA01B</string>
 </dict>
 </plist>
